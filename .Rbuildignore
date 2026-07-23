@@ -5,3 +5,4 @@
 .devcontainer/*
 ^data-raw$
 requirements$
+.github/*
