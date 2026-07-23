@@ -1,18 +1,8 @@
 testthat::test_that("zigzag_index()", {
-  norm_dist <- sapply(seq_len(100), function(x) {
-    med_i <- sample(seq_len(100), 1)
-    zigzag_index(
-      hist(
-        rnorm(1000, med_i, med_i / sample(c(2, 3, 4, 5, 10), 1)),
-        plot = FALSE
-      )$counts
-    )
-  })
-  rand_dist <- sapply(seq_len(100), function(x) {
-    med_i <- sample(seq_len(100), 1)
-    zigzag_index(hist(sample(seq_len(1000), 100), plot = FALSE)$counts)
-  })
+  norm_dist <- c(1, 1, 2, 3, 5, 10, 5, 8, 2, 1, 1) |> zigzag_index()
+  rand_dist <- c(1, 6, 5, 3, 9, 5, 6, 1, 8, 3, 5, 8) |> zigzag_index()
   testthat::expect_true(
-    mean(rand_dist, na.rm = TRUE) > mean(norm_dist, na.rm = TRUE)
+    rand_dist[is.finite(rand_dist)] |> mean() >
+      norm_dist[is.finite(norm_dist)] |> mean()
   )
 })

@@ -1,7 +1,5 @@
 #include <Rcpp.h>
 using namespace Rcpp;
-
-
 //' Function to compute the ZigZag index
 //'
 //' This function returns the ZigZag index as a numeric
