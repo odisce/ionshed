@@ -2,16 +2,16 @@
 % Please edit documentation in R/ionshed.R
 \name{check_mslevels}
 \alias{check_mslevels}
-\title{Extract data from Msnobject}
+\title{Check available ms levels}
 \usage{
 check_mslevels(data)
 }
 \arguments{
-\item{data}{MSnObject or a data.table with (file, rt, mz, i)}
+\item{data}{OnDiskMSnExp, MSnObject, MsExperiment or a data.table with (file, rt, mz, i)}
 }
 \value{
 An integer with the available MSlevels
 }
 \description{
-Extract data from Msnobject
+Check available ms levels
 }

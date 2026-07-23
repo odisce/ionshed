@@ -44,7 +44,7 @@ Run the `ionshed` algorithm on the first file `file_ind = 1`:
 
 ```r
 ion_res <- ionshed::ionshed(
-  MSnobject = msn_in,
+  data = msn_in,
   file_ind = 1,
   rttol = 5,
   ppm = 3

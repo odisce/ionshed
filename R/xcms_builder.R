@@ -1,17 +1,17 @@
 #' Create XCMS object with ionshed peaks
 #'
 #' @param peak_info peak info obtained from `ionshed()`
+#' @param msLevel MS level to assign peaks in the xcms object
 #' @inheritParams SpMat_DescendingROI
+#' @inheritParams ionshed
 #' @import data.table magrittr
 #' @return
 #' A `xcms object` with manual peak integration.
 #' @export
-get_xcmsobj <- function(peak_info, msnobj, msLevel = 1L) {
-  if (!requireNamespace("xcms", quietly = TRUE)) {
-    stop("xcms package needs to be installed to use this function")
-  }
+get_xcmsobj <- function(peak_info, data, msLevel = 1L) {
+  rlang::check_installed("xcms")
   obj_out <- xcms::manualChromPeaks(
-    msnobj,
+    data,
     chromPeaks = peak_info[
       ,
       .(
@@ -24,6 +24,5 @@ get_xcmsobj <- function(peak_info, msnobj, msLevel = 1L) {
       as.matrix(),
     msLevel = msLevel
   )
-  obj_out@.processHistory <- list(xcms:::ProcessHistory())
   return(obj_out)
 }

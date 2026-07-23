@@ -2,7 +2,7 @@
 % Please edit documentation in R/ionshed.R
 \name{fun_create_map_single}
 \alias{fun_create_map_single}
-\title{Extract data from Msnobject}
+\title{Extract signals coordinates and map on a sparse grid}
 \usage{
 fun_create_map_single(
   data,
@@ -15,7 +15,7 @@ fun_create_map_single(
 )
 }
 \arguments{
-\item{data}{MSnObject or a data.table with (file, rt, mz, i)}
+\item{data}{OnDiskMSnExp, MSnObject, MsExperiment or a data.table with (file, rt, mz, i)}
 
 \item{file_ind}{File index to subset}
 
@@ -24,6 +24,10 @@ fun_create_map_single(
 \item{rt_res}{rt resolution in second to create the grid}
 
 \item{mslevels}{choose msLevels to extract (default to mslevel=1)}
+
+\item{isowin_mz}{\code{numeric} value to filter a specific isolation window}
+
+\item{rt_range}{\code{numeric} vector \code{c(rtmin, rtmax)} to define the rt range to extract. Default \code{NULL}}
 }
 \value{
 A \code{list} with:
@@ -40,9 +44,8 @@ A \code{list} with:
 }
 }
 \description{
-Extract data from Msnobject
+Extract signals coordinates and map on a sparse grid
 }
 \examples{
-data_in <- MSnbase::filterFile(MSnExpObj, 1)
-fun_create_map_single(data_in, file_ind = 1)
+fun_create_map_single(data = MSnbase::filterFile(MSnExpObj, 1), file_ind = 1)
 }

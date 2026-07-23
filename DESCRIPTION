@@ -17,13 +17,16 @@ Depends:
 Imports: 
     data.table,
     magrittr,
-    Rcpp
+    Rcpp,
+    rlang
 Suggests: 
     testthat (>= 3.0.0),
-    xcms,
     MsExperiment,
+    MSnbase,
     mzR,
-    MSnbase
+    renv,
+    Spectra,
+    xcms
 LinkingTo: 
     Rcpp,
     RcppArmadillo

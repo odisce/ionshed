@@ -2,12 +2,12 @@
 % Please edit documentation in R/ionshed.R
 \name{ionshed}
 \alias{ionshed}
-\title{Get roi and peaks from MSnobject}
+\title{Run ionshed segmentation}
 \usage{
 ionshed(
   data,
   file_ind = 1,
-  mz_res = 0.001,
+  mz_res = 1e-04,
   rt_res = 0.01,
   rttol = 5,
   ppm = 5,
@@ -19,7 +19,7 @@ ionshed(
 )
 }
 \arguments{
-\item{data}{MSnObject or a data.table with (file, rt, mz, i)}
+\item{data}{OnDiskMSnExp, MSnObject, MsExperiment or a data.table with (file, rt, mz, i)}
 
 \item{file_ind}{File index to subset}
 
@@ -34,6 +34,8 @@ ionshed(
 \item{subset_dt}{An optional \code{data.table} to restrict search space with rtmin, rtmax, mzmin, mzmax}
 
 \item{mslevels}{choose msLevels to extract (default to mslevel=1)}
+
+\item{rt_range}{\code{numeric} vector \code{c(rtmin, rtmax)} to define the rt range to extract. Default \code{NULL}}
 
 \item{by_isowin}{\code{Logical} to run extraction for each isolation windows separately (DIA)}
 
@@ -79,9 +81,9 @@ A \code{list} with:
 }
 }
 \description{
-Get roi and peaks from MSnobject
+Run ionshed segmentation
 }
 \examples{
-res <- ionshed(MSnobject = MSnExpObj, file_ind = 1, rttol = 10, ppm = 10)
+res <- ionshed(data = MSnExpObj, file_ind = 1, rttol = 10, ppm = 10)
 str(res)
 }

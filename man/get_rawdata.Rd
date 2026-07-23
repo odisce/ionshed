@@ -4,10 +4,10 @@
 \alias{get_rawdata}
 \title{Get raw data from MSnexp object}
 \usage{
-get_rawdata(data_in)
+get_rawdata(data)
 }
 \arguments{
-\item{data_in}{MSnExp MsExperiment or XcmsExperiment object}
+\item{data}{OnDiskMSnExp, MSnObject, MsExperiment or a data.table with (file, rt, mz, i)}
 }
 \value{
 A \code{data.table} object with:
@@ -23,6 +23,5 @@ A \code{data.table} object with:
 Get raw data from MSnexp object
 }
 \examples{
-data_in <- MSnbase::filterFile(MSnExpObj, 1)
-get_rawdata(data_in)
+get_rawdata(data = MSnbase::filterFile(MSnExpObj, 1))
 }

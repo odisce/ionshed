@@ -1,7 +1,6 @@
 #' Install package environment
 #' 
 #' @import magrittr
-#' @export
 init_env <- function() {
   path_to_check <- c(
     "./inst/requirements",

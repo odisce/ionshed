@@ -1,8 +1,9 @@
 #' Get raw data from MSnexp object
 #'
-#' @param data_in MSnExp MsExperiment or XcmsExperiment object
+#' @inheritParams ionshed
 #'
 #' @import data.table
+#' @importFrom rlang check_installed
 #'
 #' @return A `data.table` object with:
 #'   - `file`: file number
@@ -12,13 +13,12 @@
 #'   - `i`: Intensity
 #' @export
 #' @examples
-#' data_in <- MSnbase::filterFile(MSnExpObj, 1)
-#' get_rawdata(data_in)
-get_rawdata <- function(data_in) {
-  if (class(data_in) %in% c("XcmsExperiment", "MsExperiment")) {
+#' get_rawdata(data = MSnbase::filterFile(MSnExpObj, 1))
+get_rawdata <- function(data) {
+  if (class(data) %in% c("XcmsExperiment", "MsExperiment")) {
     rlang::check_installed("MsExperiment")
     rlang::check_installed("Spectra")
-    spctr <- MsExperiment::spectra(data_in)
+    spctr <- MsExperiment::spectra(data)
     mz_values <- Spectra::mz(spctr)
     int_values <- Spectra::intensity(spctr)
     rt_values <- Spectra::rtime(spctr)
@@ -27,7 +27,7 @@ get_rawdata <- function(data_in) {
     isowin_value <- Spectra::isolationWindowTargetMz(spctr)
   } else {
     rlang::check_installed("MSnbase")
-    spctr <- MSnbase::spectra(data_in)
+    spctr <- MSnbase::spectra(data)
     mz_values <- lapply(spctr, MSnbase::mz)
     int_values <- lapply(spctr, MSnbase::intensity)
     rt_values <- lapply(spctr, MSnbase::rtime)
@@ -54,7 +54,7 @@ get_rawdata <- function(data_in) {
   return(output[])
 }
 
-#' Extract data from Msnobject
+#' Check available ms levels
 #' @inheritParams ionshed
 #' @return An integer with the available MSlevels
 #' @export
@@ -85,12 +85,14 @@ check_mslevels <- function(data) {
   sort(out)
 }
 
-#' Extract data from Msnobject
+#' Extract signals coordinates and map on a sparse grid
 #'
 #' @param file_ind File index to subset
 #' @param mz_res m/Z resolution in Dalton to create the grid
 #' @param rt_res rt resolution in second to create the grid
 #' @param mslevels choose msLevels to extract (default to mslevel=1)
+#' @param isowin_mz `numeric` value to filter a specific isolation window
+#' @param rt_range `numeric` vector `c(rtmin, rtmax)` to define the rt range to extract. Default `NULL`
 #' @inheritParams ionshed
 #'
 #' @import data.table magrittr
@@ -105,8 +107,7 @@ check_mslevels <- function(data) {
 #'     - `mz`: m/Z
 #' @export
 #' @examples
-#' data_in <- MSnbase::filterFile(MSnExpObj, 1)
-#' fun_create_map_single(data_in, file_ind = 1)
+#' fun_create_map_single(data = MSnbase::filterFile(MSnExpObj, 1), file_ind = 1)
 fun_create_map_single <- function(
   data,
   file_ind = 1,
@@ -230,9 +231,9 @@ fun_create_map_single <- function(
   )
 }
 
-#' Get roi and peaks from MSnobject
+#' Run ionshed segmentation
 #'
-#' @param data MSnObject or a data.table with (file, rt, mz, i)
+#' @param data OnDiskMSnExp, MSnObject, MsExperiment or a data.table with (file, rt, mz, i)
 #' @param subset_dt An optional `data.table` to restrict search space with rtmin, rtmax, mzmin, mzmax
 #' @param by_isowin `Logical` to run extraction for each isolation windows separately (DIA)
 #' @inheritParams get_rawdata
@@ -273,12 +274,12 @@ fun_create_map_single <- function(
 #'     - `rtdiff`: retention time maximum difference in seconds
 #' @export
 #' @examples
-#' res <- ionshed(MSnobject = MSnExpObj, file_ind = 1, rttol = 10, ppm = 10)
+#' res <- ionshed(data = MSnExpObj, file_ind = 1, rttol = 10, ppm = 10)
 #' str(res)
 ionshed <- function(
   data,
   file_ind = 1,
-  mz_res = 0.001,
+  mz_res = 0.0001,
   rt_res = 0.01,
   rttol = 5,
   ppm = 5,
