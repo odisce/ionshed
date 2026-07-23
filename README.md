@@ -19,14 +19,6 @@ The algorithm can be used on any 3D datasets by giving their coordinates in a ta
 
 ## Installation
 
-The binary file can be found in the release section and installed like this:
-| method | command |
-|--|--|
-| [remotes](https://cran.r-project.org/web/packages/remotes/index.html) | `remotes::install_github("odisce/ionshed")` |
-| [renv](https://cran.r-project.org/web/packages/renv/) | `renv::install("github::odisce/ionshed")` |
-| [pak](https://cran.r-project.org/web/packages/pak/) | `pak::pkg_install("odisce/ionshed")` |
-
-
 The latest **ionshed** version can be installed from source using your prefered method (need [Rtools](https://cloud.r-project.org/)):
 
 | method | command |
@@ -48,7 +40,7 @@ Load `.mzML` files:
 | using `MsExperiment` | `msn_in <- MsExperiment::readMsExperiment(spectraFiles = "path/to/my/.mzml")` |
 
 
-Run the `ionshed` algorithm on the first file:
+Run the `ionshed` algorithm on the first file `file_ind = 1`:
 
 ```r
 ion_res <- ionshed::ionshed(
@@ -60,25 +52,15 @@ ion_res <- ionshed::ionshed(
 ```
 
 The results are stored in a list with two levels:
-  - original segmented coordinates:
+  - original segmented coordinates `ion_res["roi_data"]`:
     ```r
     str(ion_res$roi_data)
     ```
-  - a summary of each segments:
+  - a summary of each segments `ion_res["peak_info"]`:
     ```r
     str(ion_res$peak_info)
     ```
 
-
-A derived function allow to extract XICs for each segment by extending the retention time range by `rttol` seconds:
-
-```r
-xics_res <- extract_XICs(
-  roi_ls = ion_res,
-  debugL = FALSE,
-  rttol = 10
-)
-```
 
 ### From 3D coordinates
 
@@ -91,14 +73,15 @@ And some optional:
   - `file`: file id as an integer
   - `mslevel`: MS level
   - `isowin`: Isolation window
-  
+
+### Extract raw XICs
+
+A derived function allow to extract XICs for each segments and close signals by extending the retention time range by `rttol` seconds:
 
 ```r
-data_in <- ionshed::
-ion_res <- ionshed::ionshed(
-  MSnobject = data_in,
-  file_ind = 1,
-  rttol = 5,
-  ppm = 3
+xics_res <- extract_XICs(
+  roi_ls = ion_res,
+  debugL = FALSE,
+  rttol = 10
 )
 ```
