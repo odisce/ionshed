@@ -4,14 +4,15 @@
 \alias{get_xcmsobj}
 \title{Create XCMS object with ionshed peaks}
 \usage{
-get_xcmsobj(peak_info, data, msLevel = 1L)
+get_xcmsobj(peak_info, data, mslevel = 1L)
 }
 \arguments{
 \item{peak_info}{peak info obtained from \code{ionshed()}}
 
-\item{data}{OnDiskMSnExp, MSnObject, MsExperiment or a data.table with (file, rt, mz, i)}
+\item{data}{OnDiskMSnExp, MSnObject, MsExperiment or a data.table
+with (file, rt, mz, i)}
 
-\item{msLevel}{MS level to assign peaks in the xcms object}
+\item{mslevel}{MS level to assign peaks in the xcms object}
 }
 \value{
 A \verb{xcms object} with manual peak integration.

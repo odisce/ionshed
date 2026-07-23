@@ -4,7 +4,7 @@
 \alias{SpMat_getEICs}
 \title{Function to extract EIcs using Sparse Matrix}
 \usage{
-SpMat_getEICs(locations, values, eics_dt, rttol = 10L, debugL = FALSE)
+SpMat_getEICs(locations, values, eics_dt, rttol = 10L, debug = FALSE)
 }
 \arguments{
 \item{locations}{A matrix (2xN) with row (1xN) and column (1xN)}
@@ -15,7 +15,7 @@ SpMat_getEICs(locations, values, eics_dt, rttol = 10L, debugL = FALSE)
 
 \item{rttol}{(optional) to extend the rt range}
 
-\item{debugL}{Boolean to print debug message}
+\item{debug}{Boolean to print debug message}
 }
 \description{
 This function returns a matrice with EICs corresponding to asked range(s).

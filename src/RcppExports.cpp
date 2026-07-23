@@ -12,8 +12,8 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // SpMat_DescendingROI
-arma::mat SpMat_DescendingROI(const arma::umat locations, const arma::vec values, const arma::uword rttol, const double ppm, const bool debugL, const bool eachiter);
-RcppExport SEXP _ionshed_SpMat_DescendingROI(SEXP locationsSEXP, SEXP valuesSEXP, SEXP rttolSEXP, SEXP ppmSEXP, SEXP debugLSEXP, SEXP eachiterSEXP) {
+arma::mat SpMat_DescendingROI(const arma::umat locations, const arma::vec values, const arma::uword rttol, const double ppm, const bool debug, const bool eachiter);
+RcppExport SEXP _ionshed_SpMat_DescendingROI(SEXP locationsSEXP, SEXP valuesSEXP, SEXP rttolSEXP, SEXP ppmSEXP, SEXP debugSEXP, SEXP eachiterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -21,15 +21,15 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const arma::vec >::type values(valuesSEXP);
     Rcpp::traits::input_parameter< const arma::uword >::type rttol(rttolSEXP);
     Rcpp::traits::input_parameter< const double >::type ppm(ppmSEXP);
-    Rcpp::traits::input_parameter< const bool >::type debugL(debugLSEXP);
+    Rcpp::traits::input_parameter< const bool >::type debug(debugSEXP);
     Rcpp::traits::input_parameter< const bool >::type eachiter(eachiterSEXP);
-    rcpp_result_gen = Rcpp::wrap(SpMat_DescendingROI(locations, values, rttol, ppm, debugL, eachiter));
+    rcpp_result_gen = Rcpp::wrap(SpMat_DescendingROI(locations, values, rttol, ppm, debug, eachiter));
     return rcpp_result_gen;
 END_RCPP
 }
 // SpMat_getEICs
-Rcpp::DataFrame SpMat_getEICs(const arma::umat locations, const arma::dmat values, const arma::umat eics_dt, const arma::uword rttol, const bool debugL);
-RcppExport SEXP _ionshed_SpMat_getEICs(SEXP locationsSEXP, SEXP valuesSEXP, SEXP eics_dtSEXP, SEXP rttolSEXP, SEXP debugLSEXP) {
+Rcpp::DataFrame SpMat_getEICs(const arma::umat locations, const arma::dmat values, const arma::umat eics_dt, const arma::uword rttol, const bool debug);
+RcppExport SEXP _ionshed_SpMat_getEICs(SEXP locationsSEXP, SEXP valuesSEXP, SEXP eics_dtSEXP, SEXP rttolSEXP, SEXP debugSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -37,8 +37,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const arma::dmat >::type values(valuesSEXP);
     Rcpp::traits::input_parameter< const arma::umat >::type eics_dt(eics_dtSEXP);
     Rcpp::traits::input_parameter< const arma::uword >::type rttol(rttolSEXP);
-    Rcpp::traits::input_parameter< const bool >::type debugL(debugLSEXP);
-    rcpp_result_gen = Rcpp::wrap(SpMat_getEICs(locations, values, eics_dt, rttol, debugL));
+    Rcpp::traits::input_parameter< const bool >::type debug(debugSEXP);
+    rcpp_result_gen = Rcpp::wrap(SpMat_getEICs(locations, values, eics_dt, rttol, debug));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -59,14 +59,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // summarize_by_class
-Rcpp::DataFrame summarize_by_class(DataFrame df, bool debugL);
-RcppExport SEXP _ionshed_summarize_by_class(SEXP dfSEXP, SEXP debugLSEXP) {
+Rcpp::DataFrame summarize_by_class(DataFrame df, bool debug);
+RcppExport SEXP _ionshed_summarize_by_class(SEXP dfSEXP, SEXP debugSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< DataFrame >::type df(dfSEXP);
-    Rcpp::traits::input_parameter< bool >::type debugL(debugLSEXP);
-    rcpp_result_gen = Rcpp::wrap(summarize_by_class(df, debugL));
+    Rcpp::traits::input_parameter< bool >::type debug(debugSEXP);
+    rcpp_result_gen = Rcpp::wrap(summarize_by_class(df, debug));
     return rcpp_result_gen;
 END_RCPP
 }

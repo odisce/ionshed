@@ -79,7 +79,7 @@ And some optional:
 A derived function allow to extract XICs for each segments and close signals by extending the retention time range by `rttol` seconds:
 
 ```r
-xics_res <- extract_XICs(
+xics_res <- extract_xics(
   roi_ls = ion_res,
   debugL = FALSE,
   rttol = 10

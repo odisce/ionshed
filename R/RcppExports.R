@@ -10,12 +10,12 @@
 #' @param values A vector of N values
 #' @param rttol Tolerance in rt dimension (grid points)
 #' @param ppm Tolerance in ppm (variable grid)
-#' @param debugL Boolean to print debug messages
+#' @param debug Boolean to print debug messages
 #' @param eachiter Boolean to return iteration steps details
 #' @export
 #'
-SpMat_DescendingROI <- function(locations, values, rttol = 10L, ppm = 10, debugL = FALSE, eachiter = FALSE) {
-    .Call(`_ionshed_SpMat_DescendingROI`, locations, values, rttol, ppm, debugL, eachiter)
+SpMat_DescendingROI <- function(locations, values, rttol = 10L, ppm = 10, debug = FALSE, eachiter = FALSE) {
+    .Call(`_ionshed_SpMat_DescendingROI`, locations, values, rttol, ppm, debug, eachiter)
 }
 
 #' Function to extract EIcs using Sparse Matrix
@@ -26,19 +26,19 @@ SpMat_DescendingROI <- function(locations, values, rttol = 10L, ppm = 10, debugL
 #' @param values A matrix (ValuesxN) with values in the same order as locations
 #' @param eics_dt coordinate as a matrix with id, mzmin, mzmax, rtmin, rtmax
 #' @param rttol (optional) to extend the rt range
-#' @param debugL Boolean to print debug message
+#' @param debug Boolean to print debug message
 #' @export
 #'
-SpMat_getEICs <- function(locations, values, eics_dt, rttol = 10L, debugL = FALSE) {
-    .Call(`_ionshed_SpMat_getEICs`, locations, values, eics_dt, rttol, debugL)
+SpMat_getEICs <- function(locations, values, eics_dt, rttol = 10L, debug = FALSE) {
+    .Call(`_ionshed_SpMat_getEICs`, locations, values, eics_dt, rttol, debug)
 }
 
 summarize_one_class <- function(roi, rt_nv, i_nv, mz_nv, mzsc_iv, rtsc_iv) {
     .Call(`_ionshed_summarize_one_class`, roi, rt_nv, i_nv, mz_nv, mzsc_iv, rtsc_iv)
 }
 
-summarize_by_class <- function(df, debugL = FALSE) {
-    .Call(`_ionshed_summarize_by_class`, df, debugL)
+summarize_by_class <- function(df, debug = FALSE) {
+    .Call(`_ionshed_summarize_by_class`, df, debug)
 }
 
 min_diff <- function(mz_vec) {

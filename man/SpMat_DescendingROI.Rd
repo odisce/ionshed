@@ -9,7 +9,7 @@ SpMat_DescendingROI(
   values,
   rttol = 10L,
   ppm = 10,
-  debugL = FALSE,
+  debug = FALSE,
   eachiter = FALSE
 )
 }
@@ -22,7 +22,7 @@ SpMat_DescendingROI(
 
 \item{ppm}{Tolerance in ppm (variable grid)}
 
-\item{debugL}{Boolean to print debug messages}
+\item{debug}{Boolean to print debug messages}
 
 \item{eachiter}{Boolean to return iteration steps details}
 }

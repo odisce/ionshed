@@ -219,7 +219,7 @@ Rcpp::DataFrame summarize_one_class(
 // [[Rcpp::export]]
 Rcpp::DataFrame summarize_by_class(
     DataFrame df,
-    bool debugL = false
+    bool debug = false
 ) {
     using namespace std::chrono;
     // Init chronos
@@ -238,14 +238,14 @@ Rcpp::DataFrame summarize_by_class(
     IntegerVector col_rtsc = df["rt_sc"];
     IntegerVector col_roi = df["roi"];
     
-    if (debugL) {
+    if (debug) {
         timeB = high_resolution_clock::now();
         auto duration = duration_cast<milliseconds>(timeB - timeA);
         Rcpp::Rcout << "Initialize input: " << duration.count() << "ms\n";
     }
     // Get unique classes
     std::vector<size_t> class_indexes = sorted_index_int(col_roi);
-    if (debugL) {
+    if (debug) {
         timeBB = high_resolution_clock::now();
         auto duration = duration_cast<milliseconds>(timeBB - timeB);
         Rcpp::Rcout << "Initialize class vector: " << duration.count() << "ms\n";
@@ -262,7 +262,7 @@ Rcpp::DataFrame summarize_by_class(
             roi_nb++;
         }
     }
-    if (debugL) {
+    if (debug) {
         timeBBB = high_resolution_clock::now();
         auto duration = duration_cast<milliseconds>(timeBBB - timeBB);
         Rcpp::Rcout << "Count unique rois (" << roi_nb << "): " << duration.count() << "ms\n";
@@ -281,7 +281,7 @@ Rcpp::DataFrame summarize_by_class(
             prev_i = roi_i;
         }
     }
-    if (debugL) {
+    if (debug) {
         timeC = high_resolution_clock::now();
         auto duration = duration_cast<seconds>(timeC - timeB);
         Rcpp::Rcout << "Getting unique rois: " << duration.count() << "s\n";
@@ -289,7 +289,7 @@ Rcpp::DataFrame summarize_by_class(
     // Iterate over each rois
     std::size_t startv_i = 0;
     std::map<std::string, std::vector<double>> results = SummaryObj(unique_classes.size());
-    if (debugL) {
+    if (debug) {
         timeD = high_resolution_clock::now();
     }
     for (int cl_it = 0; cl_it != unique_classes.size();  ++cl_it ) {
@@ -320,7 +320,7 @@ Rcpp::DataFrame summarize_by_class(
             col_rtsc[class_vind]
         );
     }
-    if (debugL) {
+    if (debug) {
         timeE = high_resolution_clock::now();
         auto duration = duration_cast<seconds>(timeE - timeD);
         Rcpp::Rcout << "Processed all rois: " << duration.count() << "s\n";

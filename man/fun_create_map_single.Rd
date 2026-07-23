@@ -15,7 +15,8 @@ fun_create_map_single(
 )
 }
 \arguments{
-\item{data}{OnDiskMSnExp, MSnObject, MsExperiment or a data.table with (file, rt, mz, i)}
+\item{data}{OnDiskMSnExp, MSnObject, MsExperiment or a data.table
+with (file, rt, mz, i)}
 
 \item{file_ind}{File index to subset}
 
@@ -27,7 +28,8 @@ fun_create_map_single(
 
 \item{isowin_mz}{\code{numeric} value to filter a specific isolation window}
 
-\item{rt_range}{\code{numeric} vector \code{c(rtmin, rtmax)} to define the rt range to extract. Default \code{NULL}}
+\item{rt_range}{\code{numeric} vector \code{c(rtmin, rtmax)} to define the rt
+range to extract. Default \code{NULL}}
 }
 \value{
 A \code{list} with:
@@ -47,5 +49,5 @@ A \code{list} with:
 Extract signals coordinates and map on a sparse grid
 }
 \examples{
-fun_create_map_single(data = MSnbase::filterFile(MSnExpObj, 1), file_ind = 1)
+fun_create_map_single(data = MSnbase::filterFile(msnexp_obj, 1), file_ind = 1)
 }

@@ -15,11 +15,12 @@ ionshed(
   mslevels = 1,
   rt_range = NULL,
   by_isowin = TRUE,
-  debugL = FALSE
+  debug = FALSE
 )
 }
 \arguments{
-\item{data}{OnDiskMSnExp, MSnObject, MsExperiment or a data.table with (file, rt, mz, i)}
+\item{data}{OnDiskMSnExp, MSnObject, MsExperiment or a data.table
+with (file, rt, mz, i)}
 
 \item{file_ind}{File index to subset}
 
@@ -31,15 +32,18 @@ ionshed(
 
 \item{ppm}{Tolerance in ppm (variable grid)}
 
-\item{subset_dt}{An optional \code{data.table} to restrict search space with rtmin, rtmax, mzmin, mzmax}
+\item{subset_dt}{An optional \code{data.table} to restrict search space
+with rtmin, rtmax, mzmin, mzmax}
 
 \item{mslevels}{choose msLevels to extract (default to mslevel=1)}
 
-\item{rt_range}{\code{numeric} vector \code{c(rtmin, rtmax)} to define the rt range to extract. Default \code{NULL}}
+\item{rt_range}{\code{numeric} vector \code{c(rtmin, rtmax)} to define the rt
+range to extract. Default \code{NULL}}
 
-\item{by_isowin}{\code{Logical} to run extraction for each isolation windows separately (DIA)}
+\item{by_isowin}{\code{Logical} to run extraction for each isolation
+windows separately (DIA)}
 
-\item{debugL}{Boolean to print debug messages}
+\item{debug}{Boolean to print debug messages}
 }
 \value{
 A \code{list} with:
@@ -84,6 +88,6 @@ A \code{list} with:
 Run ionshed segmentation
 }
 \examples{
-res <- ionshed(data = MSnExpObj, file_ind = 1, rttol = 10, ppm = 10)
+res <- ionshed(data = msnexp_obj, file_ind = 1, rttol = 10, ppm = 10)
 str(res)
 }

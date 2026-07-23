@@ -7,7 +7,8 @@
 check_mslevels(data)
 }
 \arguments{
-\item{data}{OnDiskMSnExp, MSnObject, MsExperiment or a data.table with (file, rt, mz, i)}
+\item{data}{OnDiskMSnExp, MSnObject, MsExperiment or a data.table
+with (file, rt, mz, i)}
 }
 \value{
 An integer with the available MSlevels

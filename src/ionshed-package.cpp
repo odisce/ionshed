@@ -12,7 +12,7 @@
 //' @param values A vector of N values
 //' @param rttol Tolerance in rt dimension (grid points)
 //' @param ppm Tolerance in ppm (variable grid)
-//' @param debugL Boolean to print debug messages
+//' @param debug Boolean to print debug messages
 //' @param eachiter Boolean to return iteration steps details
 //' @export
 //'
@@ -22,7 +22,7 @@ arma::mat SpMat_DescendingROI(
   const arma::vec values,
   const arma::uword rttol = 10,
   const double ppm = 10,
-  const bool debugL = false,
+  const bool debug = false,
   const bool eachiter = false
 ) {
   using namespace std;
@@ -45,7 +45,7 @@ arma::mat SpMat_DescendingROI(
   // For each, get submat and assign ROI
   const arma::uvec values_roi(values.n_elem, arma::fill::ones);
   arma::sp_umat XROI = arma::sp_umat(locations, values_roi);
-  if (debugL) {
+  if (debug) {
     Rcpp::Rcout << "cols: " << XROI.n_cols << " rows: " << XROI.n_rows << endl;
   }
   const int amaxmz = XROI.n_cols; //mz in col
@@ -156,7 +156,7 @@ arma::mat SpMat_DescendingROI(
               min_val_index = abs(diffval);
               roi_sel = roi_block_val(iz);
             }
-            // if (debugL) {
+            // if (debug) {
             //   Rcpp::Rcout << "diffval: " << diffval << " ";
             //   Rcpp::Rcout << "absdiffval: " << absdiffval << " ";
             //   Rcpp::Rcout << "min_val_index: " << min_val_index << " ";
@@ -187,7 +187,7 @@ arma::mat SpMat_DescendingROI(
 //' @param values A matrix (ValuesxN) with values in the same order as locations
 //' @param eics_dt coordinate as a matrix with id, mzmin, mzmax, rtmin, rtmax
 //' @param rttol (optional) to extend the rt range
-//' @param debugL Boolean to print debug message
+//' @param debug Boolean to print debug message
 //' @export
 //'
 // [[Rcpp::export]]
@@ -196,7 +196,7 @@ Rcpp::DataFrame SpMat_getEICs(
   const arma::dmat values,
   const arma::umat eics_dt,
   const arma::uword rttol = 10,
-  const bool debugL = false
+  const bool debug = false
 ) {
   using namespace std;
   using namespace arma;
@@ -206,7 +206,7 @@ Rcpp::DataFrame SpMat_getEICs(
   auto timeC = high_resolution_clock::now();
   auto timeD = high_resolution_clock::now();
   // initalize output array
-  if (debugL) {
+  if (debug) {
     timeA = high_resolution_clock::now();
     Rcpp::Rcout << "-- Starting XICs extraction --";
   }
@@ -222,7 +222,7 @@ Rcpp::DataFrame SpMat_getEICs(
   // Iterate over eics_dt
   // const arma::uword maxcols = F(0).n_cols;
   const arma::uword maxrows = F(0).n_rows;
-  if (debugL) {
+  if (debug) {
     timeB = high_resolution_clock::now();
     auto duration = duration_cast<milliseconds>(timeB - timeA);
     Rcpp::Rcout << "Initialize input: " << duration.count() << "ms\n";
@@ -261,7 +261,7 @@ Rcpp::DataFrame SpMat_getEICs(
       }
     }
   }
-  if (debugL) {
+  if (debug) {
     timeC = high_resolution_clock::now();
     auto duration = duration_cast<milliseconds>(timeC-timeB);
     Rcpp::Rcout << "Extracted XICs: " << duration.count() << "ms\n";
@@ -274,7 +274,7 @@ Rcpp::DataFrame SpMat_getEICs(
     Rcpp::Named("xic_roi") = V(4),
     Rcpp::Named("assignment") = V(5)
   );
-  if (debugL) {
+  if (debug) {
     timeD = high_resolution_clock::now();
     auto duration = duration_cast<milliseconds>(timeD-timeC);
     Rcpp::Rcout << "Formating results: " << duration.count() << "ms\n";
