@@ -1,0 +1,31 @@
+Package: ionshed
+Title: Ionshed segmentation of LCMS data
+Version: 1.0.0
+Authors@R: 
+    c(
+      person(given = "Sylvain", family = "Dechaumet", email = "sylvain.dechaumet@cea.fr", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-3387-7250")),
+      person(given = "Etienne", family = "Thevenot", email = "etienne.thevenot@cea.fr", role = c("ctb"), comment = c(ORCID = "0000-0003-1019-4577"))
+    )
+Description: Sparse matrix segmentation inspired by watershed and implemented in C++..
+License: file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Config/testthat/edition: 3
+biocViews:
+Depends:
+    R (>= 4.0.0)
+Imports: 
+    data.table,
+    magrittr,
+    Rcpp
+Suggests: 
+    testthat (>= 3.0.0),
+    xcms,
+    MsExperiment,
+    mzR,
+    MSnbase
+LinkingTo: 
+    Rcpp,
+    RcppArmadillo
+LazyData: true
+Config/roxygen2/version: 8.0.0

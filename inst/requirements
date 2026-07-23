@@ -1,0 +1,9 @@
+## dev packages
+devtools
+usethis
+testthat
+
+## for vscode QoL
+languageserver
+httpgd
+jsonlite

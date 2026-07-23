@@ -1,0 +1,7 @@
+^renv$
+^renv\.lock$
+^ionshed\.Rproj$
+^\.Rproj\.user$
+.devcontainer/*
+^data-raw$
+requirements$

@@ -1,0 +1,7 @@
+.Rproj.user
+*devcontainer
+renv/*
+R/dev/*
+.Rp*
+*.pdf
+/tests/testthat/dev*

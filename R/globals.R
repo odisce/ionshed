@@ -1,0 +1,27 @@
+#' @import utils 
+utils::globalVariables(
+  c(
+    ".",
+    "rt",
+    "minmz",
+    "idrt",
+    "idmz",
+    "i",
+    "mz",
+    "mz_min",
+    "rt_min",
+    "minval",
+    "mzmax",
+    "mzmin",
+    "mz_sc",
+    "mzid_end",
+    "mzid_start",
+    "roi",
+    "rtmax",
+    "rtmin",
+    "rt_sc",
+    "rtid_end",
+    "rtid_start",
+    "valn"
+  )
+)
