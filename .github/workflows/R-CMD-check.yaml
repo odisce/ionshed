@@ -37,9 +37,23 @@ jobs:
           use-public-rspm: true
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck
+          extra-packages: any::rcmdcheck, any::devtools
           needs: check
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
           error-on: '"error"'
+      # Build and upload binary artifact for Ubuntu and Windows latest
+      - name: Build R package (MacOS/Windows)
+        if: ${{ matrix.config.os == 'macos-latest' || matrix.config.os == 'windows-latest' }} && ${{ matrix.config.r == 'release' }}
+        run: |
+          R CMD build --binary .
+          mkdir -p artifacts
+          cp *.tar.gz artifacts/
+
+      - name: Upload binary artifact
+        if: ${{ matrix.config.os == 'macos-latest' || matrix.config.os == 'windows-latest' }} && ${{ matrix.config.r == 'release' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: r_binary-${{ matrix.config.os }}
+          path: artifacts/
