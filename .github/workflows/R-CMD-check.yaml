@@ -40,7 +40,7 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
       - name: Install mzR from source
-        run: BiocManager::install("mzR", force = TRUE, ask = FALSE, type = "source"))
+        run: BiocManager::install("mzR", force = TRUE, ask = FALSE, type = "source")
         shell: Rscript {0}
       - uses: r-lib/actions/check-r-package@v2
         with:
