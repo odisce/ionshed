@@ -50,10 +50,11 @@ jobs:
           R CMD build --binary .
           mkdir -p artifacts
           cp *.tar.gz artifacts/
-
+          cp *.zip artifacts/
       - name: Upload binary artifact
         if: ${{ matrix.config.os == 'macos-latest' || matrix.config.os == 'windows-latest' }} && ${{ matrix.config.r == 'release' }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: r_binary-${{ matrix.config.os }}
           path: artifacts/
+          merge-multiple: true
