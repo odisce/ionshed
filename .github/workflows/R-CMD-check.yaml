@@ -47,7 +47,8 @@ jobs:
       - name: Build R package (MacOS/Windows)
         if: ${{ matrix.config.os == 'macos-latest' || matrix.config.os == 'windows-latest' }} && ${{ matrix.config.r == 'release' }}
         run: |
-          devtools::build(".", binary = TRUE, path = "artifacts")
+          devtools::build(".", binary = TRUE, path = "artifacts/")
+          list.files("artifacts/")
         shell: Rscript {0}
         env:
           PLATFORM: ${{ matrix.config.os }}
