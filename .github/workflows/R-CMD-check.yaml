@@ -45,16 +45,13 @@ jobs:
           error-on: '"error"'
       # Build and upload binary artifact for Ubuntu and Windows latest
       - name: Build R package (MacOS/Windows)
-        if: ${{ matrix.config.os == 'macos-latest' || matrix.config.os == 'windows-latest' }} && ${{ matrix.config.r == 'release' }}
+        if: ${{ (matrix.config.os == 'macos-latest' || matrix.config.os == 'windows-latest') && matrix.config.r == 'release' }}
         run: |
           devtools::build(".", binary = TRUE, vignette = FALSE)
         shell: Rscript {0}
       - name: Upload binary artifact
-        if: ${{ matrix.config.os == 'macos-latest' || matrix.config.os == 'windows-latest' }} && ${{ matrix.config.r == 'release' }}
+        if: ${{ (matrix.config.os == 'macos-latest' || matrix.config.os == 'windows-latest') && matrix.config.r == 'release' }}
         uses: actions/upload-artifact@v4
         with:
           name: r-binary-${{ matrix.os }}
-          path: |
-            *.tar.gz
-            *.zip
-            *.tgz
+          path: ionshed*
