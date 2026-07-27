@@ -1,6 +1,6 @@
 Package: ionshed
 Title: Ionshed segmentation of LCMS data
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: 
     c(
       person(given = "Sylvain", family = "Dechaumet", email = "sylvain.dechaumet@cea.fr", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-3387-7250")),

@@ -22,6 +22,8 @@ double zigzag_index(std::vector<double> intPts) {
       zig_zag_sum=zig_zag_sum+local_zig_zag;
     }
     zig_zag_index = zig_zag_sum/(std::pow(EPI, 2.0)*eic_l);
+  } else {
+    zig_zag_index = NA_REAL;
   }
   return zig_zag_index;
 }
