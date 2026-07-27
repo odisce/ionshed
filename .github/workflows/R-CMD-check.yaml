@@ -55,5 +55,5 @@ jobs:
         if: ${{ matrix.config.os == 'macos-latest' || matrix.config.os == 'windows-latest' }} && ${{ matrix.config.r == 'release' }}
         uses: actions/upload-artifact@v4
         with:
+          name: r_binary-${{ matrix.config.os }}
           path: artifacts/*
-          archive: false
