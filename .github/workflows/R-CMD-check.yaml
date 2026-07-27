@@ -47,14 +47,14 @@ jobs:
       - name: Build R package (MacOS/Windows)
         if: ${{ matrix.config.os == 'macos-latest' || matrix.config.os == 'windows-latest' }} && ${{ matrix.config.r == 'release' }}
         run: |
-          devtools::build(".", binary = TRUE, path = "artifacts/")
-          list.files("artifacts/")
+          devtools::build(".", binary = TRUE, vignette = FALSE)
         shell: Rscript {0}
-        env:
-          PLATFORM: ${{ matrix.config.os }}
       - name: Upload binary artifact
         if: ${{ matrix.config.os == 'macos-latest' || matrix.config.os == 'windows-latest' }} && ${{ matrix.config.r == 'release' }}
         uses: actions/upload-artifact@v4
         with:
-          name: r_binary-${{ matrix.config.os }}
-          path: artifacts/*
+          name: r-binary-${{ matrix.os }}
+          path: |
+            *.tar.gz
+            *.zip
+            *.tgz
