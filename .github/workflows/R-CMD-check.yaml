@@ -47,15 +47,15 @@ jobs:
       - name: Build R package (MacOS/Windows)
         if: ${{ (matrix.config.os == 'macos-latest' || matrix.config.os == 'windows-latest') && matrix.config.r == 'release' }}
         run: |
-          devtools::build(".", binary = TRUE, vignette = FALSE)
+          binary_path <- devtools::build(".", binary = TRUE, vignette = FALSE)
+          file.copy(binary_path, file.path("artifacts", basename(binary_path)))
+          list.files(".")
+          list.files("artifacts")
         shell: Rscript {0}
       - name: Upload binary artifact
         if: ${{ (matrix.config.os == 'macos-latest' || matrix.config.os == 'windows-latest') && matrix.config.r == 'release' }}
         uses: actions/upload-artifact@v7
         with:
           name: r-binary-${{ matrix.os }}
-          path: |
-            ionshed*.zip
-            ionshed*.tgz
-            ionshed*.tar.gz
+          path: artifacts/*
           archive: false
