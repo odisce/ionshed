@@ -6,21 +6,19 @@
 
 # **ionshed**
 
-**ionshed** is an R package for sparse matrix segmentation inspired by watershed algorithms and implemented in C++. It is designed for `.mz(X)ML` data or 3D tables, parsing 3D coordinates by decreasing intensities and clustering data points based on their proximity in two dimensions.
+**ionshed** is an R package for **LC-MS raw data segmentation**, inspired by the Watershed algorithm and based on sparse matrix segmentation. Originally designed for LC-MS data (MS1 and DIA), it parses 3D coordinates (retention time, m/z, intensity) by decreasing intensities and clusters data points based on their proximity in the 2 dimensions (retention time and m/z).
 
-Originally developed for LC-MS data segmentation (MS1 and DIA), the algorithm uses the following key parameters:
-- **`rttol`**: Chromatographic resolution in seconds. Defines the minimal distance between two points to separate chromatographic peaks.
-- **`ppm`**: Mass resolution in Daltons. Defines the distance between two signals to differentiate specific ions.
+The algorithm can also be adapted to other 3D datasets by providing coordinates in a table format (see [Usage](#usage)).
 
-The algorithm is adaptable to any 3D dataset by providing coordinates in a table (see [Usage](#usage)).
+### **Key Parameters**
+- **`rttol`**: Chromatographic resolution (in seconds). Defines the minimal distance between two signals of the similar intensities to separate chromatographic peaks **at a given intensity level**.
+- **`ppm`**: Mass resolution (in Daltons). Defines the distance between two signals to differentiate specific ions.
 
----
 
 ## **Requirements**
 - **R >= 4.1.0**
 - **[Rtools](https://cloud.r-project.org/)** (to compile from source)
 
----
 
 ## **Installation**
 
@@ -57,7 +55,7 @@ The results are stored in a list with two levels:
     ```r
     str(ion_res$roi_data)
     ```
-  - `ion_res["peak_info"]`: Summary of each segments
+  - `ion_res["peak_info"]`: Summary of each segment
     ```r
     str(ion_res$peak_info)
     ```
@@ -77,8 +75,7 @@ Optional columns:
 
 ### Extract raw XICs
 
-Extract XICs (Extracted Ion Chromatograms) for each segment and nearby signals by extending 
-the retention time range (by rttol seconds):
+Extract Extracted Ion Chromatograms (XICs) for each segment and nearby signals by extending the retention time range (by `rttol` seconds). This step ensures that all relevant signals are captured for downstream analysis, such as peak integration or quantification.
 
 ```r
 xics_res <- extract_xics(
