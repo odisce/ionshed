@@ -2,7 +2,7 @@
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches: [main, master]
+    branches: [main, master, test_cicd]
   pull_request:
     branches: [main, master]
 
@@ -45,15 +45,18 @@ jobs:
           error-on: '"error"'
       # Build and upload binary artifact for Ubuntu and Windows latest
       - name: Build R package (MacOS/Windows)
-        if: ${{ matrix.config.os == 'macos-latest' || matrix.config.os == 'windows-latest' }} && ${{ matrix.config.r == 'release' }}
+        if: ${{ (matrix.config.os == 'macos-latest' || matrix.config.os == 'windows-latest') && matrix.config.r == 'release' }}
         run: |
-          devtools::build(".", binary = TRUE, path = "artifacts")
+          binary_path <- devtools::build(".", binary = TRUE, vignette = FALSE)
+          dir.create("artifacts")
+          file.copy(binary_path, file.path("artifacts", basename(binary_path)))
+          list.files(".")
+          list.files("artifacts")
         shell: Rscript {0}
-        env:
-          PLATFORM: ${{ matrix.config.os }}
       - name: Upload binary artifact
-        if: ${{ matrix.config.os == 'macos-latest' || matrix.config.os == 'windows-latest' }} && ${{ matrix.config.r == 'release' }}
-        uses: actions/upload-artifact@v4
+        if: ${{ (matrix.config.os == 'macos-latest' || matrix.config.os == 'windows-latest') && matrix.config.r == 'release' }}
+        uses: actions/upload-artifact@v7
         with:
-          name: r_binary-${{ matrix.config.os }}
+          name: r-binary-${{ matrix.os }}
           path: artifacts/*
+          archive: false
