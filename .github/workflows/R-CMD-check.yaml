@@ -48,6 +48,7 @@ jobs:
         if: ${{ (matrix.config.os == 'macos-latest' || matrix.config.os == 'windows-latest') && matrix.config.r == 'release' }}
         run: |
           binary_path <- devtools::build(".", binary = TRUE, vignette = FALSE)
+          dir.create("artifacts")
           file.copy(binary_path, file.path("artifacts", basename(binary_path)))
           list.files(".")
           list.files("artifacts")
