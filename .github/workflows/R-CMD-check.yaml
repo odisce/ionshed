@@ -49,9 +49,8 @@ jobs:
         run: |
           binary_path <- devtools::build(".", binary = TRUE, vignette = FALSE)
           dir.create("artifacts")
-          file.copy(binary_path, file.path("artifacts", basename(binary_path)))
-          list.files(".")
-          list.files("artifacts")
+          save_name <- sprintf("%s_%s_%s_%s", .Platform$pkgType, R.Version()$os, R.Version()$arch, basename(binary_path))
+          file.copy(binary_path, file.path("artifacts", save_name))
         shell: Rscript {0}
       - name: Upload binary artifact
         if: ${{ (matrix.config.os == 'macos-latest' || matrix.config.os == 'windows-latest') && matrix.config.r == 'release' }}
